@@ -1,6 +1,6 @@
 <?php
 // require __DIR__ . '/../config/pdo-connect.php';
-require __DIR__ .'/../config/pdo-connect.php';
+require __DIR__ . '/../config/pdo-connect.php';
 
 header('Content-Type: application/json');
 
@@ -20,7 +20,7 @@ if (empty($_POST['email']) or empty($_POST['passwords'])) {
 # filter_var('bob@example.com', FILTER_VALIDATE_EMAIL): 檢查 email 格式
 
 # 1. 判斷帳號是否正確
-$sql = "Select * From members where email=?";
+$sql = "Select * From employees where email=?";
 
 $stmt = $pdo->prepare($sql);
 
@@ -57,7 +57,7 @@ if ($_POST['passwords'] === $row['passwords']) {
     $_SESSION['admin'] = [
         'id' => $row['id'],
         'email' => $row['email'],
-        'firstname' => $row['firstname'],
+        'first_name' => $row['first_name'],
     ];
 } else {
     # 密碼是錯的

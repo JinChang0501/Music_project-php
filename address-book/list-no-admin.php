@@ -19,7 +19,7 @@ if ($page < 1) {
 }
 
 #總筆數
-$t_sql = "SELECT COUNT(sid) FROM address_book";
+$t_sql = "SELECT COUNT(id) FROM members";
 
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
 
@@ -31,15 +31,15 @@ if ($page > $totalPages) {
 }
 
 
-// SELECT * FROM `address_book` ORDER BY sid DESC LIMIT 0, 20
-// SELECT * FROM `address_book` ORDER BY sid DESC LIMIT 20, 20
-// SELECT * FROM `address_book` ORDER BY sid DESC LIMIT 40, 20
-// SELECT * FROM `address_book` ORDER BY sid DESC LIMIT 60, 20
+// SELECT * FROM `address_book` ORDER BY id DESC LIMIT 0, 20
+// SELECT * FROM `address_book` ORDER BY id DESC LIMIT 20, 20
+// SELECT * FROM `address_book` ORDER BY id DESC LIMIT 40, 20
+// SELECT * FROM `address_book` ORDER BY id DESC LIMIT 60, 20
 
 
 
 $sql = sprintf(
-  "SELECT * FROM address_book order by sid DESC LIMIT %s,%s",
+  "SELECT * FROM members order by id DESC LIMIT %s,%s",
   ($page - 1) * $per_page,
   $per_page
 );
@@ -104,18 +104,24 @@ include __DIR__ . "/part/navbar.php";
         <thead>
           <tr>
             <th scope="col" style="text-align: center;">#</th>
-            <th scope="col" style="text-align: center;">name</th>
-            <th scope="col" style="text-align: center;">Email</th>
-            <th scope="col" style="text-align: center;">mobile</th>
+            <th scope="col">first_name</th>
+            <th scope="col">last_name</th>
+            <th scope="col">Email</th>
+            <th scope="col">gender</th>
+            <th scope="col">phone_number</th>
+            <th scope="col">address</th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($rows as $r) : ?>
             <tr>
-              <td style="text-align: center;"><?= $r['sid'] ?></td>
-              <td style="text-align: center;"><?= $r['name'] ?></td>
+              <td style="text-align: center;"><?= $r['id'] ?></td>
+              <td style="text-align: center;"><?= $r['first_name'] ?></td>
+              <td style="text-align: center;"><?= $r['last_name'] ?></td>
               <td style="text-align: center;"><?= $r['email'] ?></td>
-              <td style="text-align: center;"><?= $r['mobile'] ?></td>
+              <td style="text-align: center;"><?= $r['gender'] ?></td>
+              <td style="text-align: center;"><?= $r['phone_number'] ?></td>
+              <td><?= htmlentities($r['address']) ?></td>
             </tr>
           <?php endforeach; ?>
         </tbody>
@@ -126,9 +132,9 @@ include __DIR__ . "/part/navbar.php";
 
 <?php include __DIR__ . "/part/scripts.php" ?>
 <script>
-  const deleteOne = (sid) => {
-    if (confirm(`確定要刪除${sid}的資料嗎?`)) {
-      location.href = `delete.php?sid=${sid}`;
+  const deleteOne = (id) => {
+    if (confirm(`確定要刪除${id}的資料嗎?`)) {
+      location.href = `delete.php?id=${id}`;
     }
   }
 </script>

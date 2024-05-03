@@ -12,14 +12,12 @@ $output = [
 
 // TODO: 欄位資料檢查
 // 檢查是否有接收到必要的欄位資料
-if (!isset($_POST['first_name']) || !isset($_POST['last_name']) || !isset($_POST['email']) || !isset($_POST['passwords']) || !isset($_POST['gender']) || !isset($_POST['phone_number']) || !isset($_POST['birthday']) || !isset($_POST['address'])) {
+if (!isset($_POST['first_name']) || !isset($_POST['last_name']) || !isset($_POST['email']) || !isset($_POST['passwords']) || !isset($_POST['gender']) || !isset($_POST['phone_number'])) {
     echo json_encode($output);
     exit; // 結束 PHP 程式
 }
 
-$sql = "INSERT INTO `members`(`first_name`, `last_name`, `email`, `passwords`, `gender`, `phone_number`, `birthday`, `address`,`created_at`) VALUES (
-    ?,
-    ?,
+$sql = "INSERT INTO `employees`(`first_name`, `last_name`, `email`, `passwords`, `gender`, `phone_number`,`created_at`) VALUES (
     ?,
     ?,
     ?,
@@ -35,8 +33,6 @@ $stmt->execute([
     $_POST['passwords'],
     $_POST['gender'],
     $_POST['phone_number'],
-    $_POST['birthday'],
-    $_POST['address']
 ]);
 
 

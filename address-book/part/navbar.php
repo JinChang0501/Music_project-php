@@ -26,7 +26,11 @@ if (!isset($pageName))
           </li>
 
           <li class="nav-item">
-            <a class="nav-link <?= $pageName == 'add' ? 'active' : '' ?>" href="add.php">新增</a>
+            <a class="nav-link <?= $pageName == 'add-members' ? 'active' : '' ?>" href="add-members.php">新增會員</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link <?= $pageName == 'add-employees' ? 'active' : '' ?>" href="add-employees.php">新增員工</a>
           </li>
         </ul>
 

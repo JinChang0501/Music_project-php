@@ -6,8 +6,8 @@ if (!isset($_SESSION)) {
 }
 
 
-$title = '新增會員列表';
-$pageName = 'add-members';
+$title = '新增員工列表';
+$pageName = 'add-employees';
 ?>
 
 
@@ -24,7 +24,7 @@ $pageName = 'add-members';
 <div class="container">
   <div class="card mt-5" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title">新增會員資料</h5>
+      <h5 class="card-title">新增員工資料</h5>
       <form name="form1" onsubmit="sendData(event)">
         <div class="mb-3">
           <label for="fname" class="form-label">名字(First_name)</label>
@@ -57,18 +57,6 @@ $pageName = 'add-members';
         <div class="mb-3">
           <label for="mobile" class="form-label">電話號碼</label>
           <input type="text" class="form-control" id="mobile" name="phone_number">
-          <div class="form-text"></div>
-        </div>
-
-        <div class="mb-3">
-          <label for="birthday" class="form-label">生日</label>
-          <input type="date" class="form-control" id="birthday" name="birthday">
-          <div class="form-text"></div>
-        </div>
-
-        <div class="mb-3">
-          <label for="address" class="form-label">地址</label>
-          <textarea id="address" cols="30" rows="3" name="address"></textarea>
           <div class="form-text"></div>
         </div>
 
@@ -123,8 +111,8 @@ $pageName = 'add-members';
     last_nameField.nextElementSibling.innerText = '';
     emailField.style.border = '1px solid #CCCCCC';
     emailField.nextElementSibling.innerText = '';
-
     // TODO: 欄位資料檢查
+
     let isPass = true; // 表單有沒有通過檢查
     if (first_nameField.value.length < 2) {
       isPass = false;
@@ -139,7 +127,7 @@ $pageName = 'add-members';
     // 有通過檢查, 才要送表單
     if (isPass) {
       const fd = new FormData(document.form1); // 沒有外觀的表單物件
-      fetch('add-members-api.php', {
+      fetch('add-employees-api.php', {
           method: 'POST',
           body: fd, // Content-Type: multipart/form-data
         }).then(r => r.json())
@@ -153,6 +141,8 @@ $pageName = 'add-members';
         })
         .catch(ex => console.log(ex))
     }
+
+
   };
   const myModal = new bootstrap.Modal('#staticBackdrop')
 </script>

@@ -19,7 +19,8 @@ if ($page < 1) {
 }
 
 #總筆數
-$t_sql = "SELECT COUNT(sid) FROM address_book";
+$t_sql = "SELECT COUNT(id) FROM members";
+
 
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
 
@@ -39,7 +40,7 @@ if ($page > $totalPages) {
 
 
 $sql = sprintf(
-  "SELECT * FROM address_book order by sid DESC LIMIT %s,%s",
+  "SELECT * FROM members order by id asc LIMIT %s,%s",
   ($page - 1) * $per_page,
   $per_page
 );
@@ -105,11 +106,14 @@ include __DIR__ . "/part/navbar.php";
           <tr>
             <th scope="col"><i class="fa-solid fa-trash"></i></th>
             <th scope="col">#</th>
-            <th scope="col">name</th>
+            <th scope="col">first_name</th>
+            <th scope="col">last_name</th>
             <th scope="col">Email</th>
-            <th scope="col">mobile</th>
+            <th scope="col">gender</th>
+            <th scope="col">phone_number</th>
             <th scope="col">birthday</th>
             <th scope="col">address</th>
+            <th scope="col">created_at</th>
             <!-- 避免xss  strip_tags/htmlentities-->
             <th scope="col"><i class="fa-solid fa-pen-to-square"></i></th>
           </tr>
@@ -117,14 +121,17 @@ include __DIR__ . "/part/navbar.php";
         <tbody>
           <?php foreach ($rows as $r) : ?>
             <tr>
-              <td><a href="javascript: deleteOne(<?= $r['sid'] ?>)"><i class="fa-solid fa-trash"></i></a></td>
-              <td><?= $r['sid'] ?></td>
-              <td><?= $r['name'] ?></td>
+              <td><a href="javascript: deleteOne(<?= $r['id'] ?>)"><i class="fa-solid fa-trash"></i></a></td>
+              <td><?= $r['id'] ?></td>
+              <td><?= $r['first_name'] ?></td>
+              <td><?= $r['last_name'] ?></td>
               <td><?= $r['email'] ?></td>
-              <td><?= $r['mobile'] ?></td>
+              <td><?= $r['gender'] ?></td>
+              <td><?= $r['phone_number'] ?></td>
               <td><?= $r['birthday'] ?></td>
               <td><?= htmlentities($r['address']) ?></td>
-              <td><a href="edit.php?sid=<?= $r['sid'] ?>"><i class="fa-solid fa-pen-to-square"></i></a></td>
+              <td><?= $r['created_at'] ?></td>
+              <td><a href="edit.php?id=<?= $r['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a></td>
             </tr>
           <?php endforeach; ?>
         </tbody>
@@ -135,9 +142,9 @@ include __DIR__ . "/part/navbar.php";
 
 <?php include __DIR__ . "/part/scripts.php" ?>
 <script>
-  const deleteOne = (sid) => {
-    if (confirm(`確定要刪除${sid}的資料嗎?`)) {
-      location.href = `delete.php?sid=${sid}`;
+  const deleteOne = (id) => {
+    if (confirm(`確定要刪除${id}的資料嗎?`)) {
+      location.href = `delete.php?id=${id}`;
     }
   }
 </script>
