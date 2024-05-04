@@ -23,7 +23,7 @@ $sql = "INSERT INTO `employees`(`first_name`, `last_name`, `email`, `passwords`,
     ?,
     ?,
     ?,
-    ?, NOW () )";
+    ?, NOW() )";
 
 $stmt = $pdo->prepare($sql);
 $stmt->execute([
@@ -32,7 +32,7 @@ $stmt->execute([
     $_POST['email'],
     $_POST['passwords'],
     $_POST['gender'],
-    $_POST['phone_number'],
+    $_POST['phone_number']
 ]);
 
 

@@ -27,25 +27,27 @@ $pageName = 'add-members';
       <h5 class="card-title">新增會員資料</h5>
       <form name="form1" onsubmit="sendData(event)">
         <div class="mb-3">
-          <label for="fname" class="form-label">名字(First_name)</label>
-          <input type="text" class="form-control" id="fname" name="first_name">
+          <label for="first_name" class="form-label">名字(First_name)</label>
+          <input type="text" class="form-control" id="first_name" name="first_name">
           <div class="form-text"></div>
         </div>
 
         <div class="mb-3">
-          <label for="lname" class="form-label">姓氏(Last_name)</label>
-          <input type="text" class="form-control" id="lname" name="last_name">
+          <label for="last_name" class="form-label">姓氏(Last_name)</label>
+          <input type="text" class="form-control" id="last_name" name="last_name">
           <div class="form-text"></div>
         </div>
 
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
           <input type="email" class="form-control" id="email" name="email">
+          <div class="form-text"></div>
         </div>
 
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
           <input type="password" class="form-control" id="password" name="passwords">
+          <div class="form-text"></div>
         </div>
 
         <div class="mb-3">
@@ -56,7 +58,7 @@ $pageName = 'add-members';
 
         <div class="mb-3">
           <label for="mobile" class="form-label">電話號碼</label>
-          <input type="text" class="form-control" id="mobile" name="phone_number">
+          <input type="text" class="form-control" id="mobile" name="phone_number" pattern="[0]{1}[9]{1}[0-9]{8}" maxlength="10">
           <div class="form-text"></div>
         </div>
 
@@ -131,6 +133,13 @@ $pageName = 'add-members';
       first_nameField.style.border = '1px solid red';
       first_nameField.nextElementSibling.innerText = '請填寫正確的姓名';
     }
+
+    if (last_nameField.value.length < 0) {
+      isPass = false;
+      last_nameField.style.border = '1px solid red';
+      last_nameField.nextElementSibling.innerText = '請填寫正確的姓名';
+    }
+
     if (!validateEmail(emailField.value)) {
       isPass = false;
       emailField.style.border = '1px solid red';
